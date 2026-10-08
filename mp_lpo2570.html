@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนพัฒนา รพ.สต. สังกัด อบจ.ลำปาง อำเภอเมืองปาน</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#00587a;--secondary:#00a896;--accent:#f4a261;--line:#dde5ec;--dark:#22303c}
+*{box-sizing:border-box}
+body{font-family:'Sarabun',Tahoma,sans-serif;line-height:1.75;color:var(--dark);background:#eef3f8;margin:0}
+header{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:2rem 1rem;text-align:center}
+header h1{margin:0 0 .3rem;font-size:1.75rem}
+header p{margin:0;opacity:.92;font-size:.98rem}
+nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.07)}
+nav .row{max-width:1180px;margin:auto;display:flex;gap:.3rem;overflow-x:auto;padding:.45rem 1rem;align-items:center}
+nav .row+.row{border-top:1px dashed var(--line);background:#f7fbfc}
+nav .lbl{font-size:.82rem;color:#7b8a96;white-space:nowrap;padding-right:.4rem}
+nav a{white-space:nowrap;text-decoration:none;color:var(--primary);font-weight:600;padding:.42rem .85rem;border-radius:999px;font-size:.9rem;cursor:pointer}
+nav a:hover{background:#e3f2f7}
+nav a.on{background:var(--primary);color:#fff}
+.container{max-width:1180px;margin:1.2rem auto 3rem;padding:0 1rem}
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:flex-end;align-items:center;margin-bottom:1rem}
+#usage{font-size:.82rem;color:#6b7b88;margin-right:auto}
+button{font-family:inherit;font-size:.92rem;border:none;padding:.55rem 1rem;border-radius:6px;cursor:pointer;color:#fff;font-weight:600}
+.b-print{background:#27ae60}.b-all{background:#2f855a}.b-edit{background:var(--primary)}
+.b-save{background:#c05621}.b-back{background:#5a6c7d}.b-reset{background:#94a3b1}
+button:hover{filter:brightness(.92)}
+.page{display:none;animation:fade .25s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:10px;padding:1.5rem;margin-bottom:1.3rem;box-shadow:0 2px 10px rgba(0,60,90,.07)}
+h2{color:var(--primary);border-bottom:3px solid var(--secondary);padding-bottom:.5rem;margin-top:0;font-size:1.3rem}
+h3{color:var(--secondary);margin:1.3rem 0 .4rem;font-size:1.05rem}
+table{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.9rem}
+th,td{border:1px solid var(--line);padding:.55rem .65rem;text-align:left;vertical-align:top}
+th{background:var(--primary);color:#fff;font-weight:600}
+tr:nth-child(even) td{background:#f7fafc}
+.t1 th{background:#2a6f97}.t2 th{background:#1b998b}.t3 th{background:#bc6c25}
+.quote{background:#f0f9fb;border-left:5px solid var(--secondary);padding:.9rem 1.1rem;border-radius:0 8px 8px 0}
+.policy{border-left:4px solid var(--accent);background:#fffaf3;padding:.7rem 1rem;border-radius:0 6px 6px 0;margin-bottom:.6rem}
+.warn{background:#fff4f4;border:1px solid #f0c2c2;border-left:5px solid #c94c4c;border-radius:0 8px 8px 0;padding:.8rem 1.1rem;font-size:.9rem;margin-top:1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem;margin-top:1rem}
+.box{background:#f7fafc;border:1px solid var(--line);border-top:4px solid var(--secondary);border-radius:8px;padding:1rem}
+.box h4{margin:.1rem 0 .5rem;color:var(--primary)}
+.box ul{margin:0;padding-left:1.15rem;font-size:.92rem}
+.hosp-card{background:#fff;border:1px solid var(--line);border-left:6px solid var(--secondary);border-radius:8px;padding:1rem 1.2rem;cursor:pointer;transition:.2s}
+.hosp-card:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,60,90,.13)}
+.hosp-card b{color:var(--primary);font-size:1.05rem}
+.embed-container{position:relative;width:100%;height:450px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#f8f9fa;margin-top:1rem}
+.embed-container iframe{width:100%;height:100%;border:0}
+.org{text-align:center;margin-top:1rem}
+.ob{border:2px solid var(--primary);border-radius:8px;padding:.6rem .9rem;background:#f7fbfd;display:block;font-size:.92rem}
+.ob.head{display:inline-block;min-width:320px;background:#e6f4f9}
+.oline{width:2px;height:20px;background:var(--primary);margin:0 auto}
+.obar{height:2px;background:var(--primary);margin:0 8%}
+.orow{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1rem;margin-top:.9rem}
+.ob.c1{border-color:#2a6f97;background:#eef6fb}
+.ob.c2{border-color:#1b998b;background:#eefaf7}
+.ob.c3{border-color:#bc6c25;background:#fdf5ec}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem}
+.tl .s{background:#e9f5ff;border-radius:8px;padding:.9rem;border-top:4px solid var(--primary)}
+.ph{display:inline-block;background:var(--primary);color:#fff;border-radius:999px;padding:.1rem .7rem;font-size:.8rem;margin-bottom:.3rem}
+.kpi{margin-bottom:1rem}
+.kpi-h{display:flex;justify-content:space-between;font-weight:600;gap:1rem}
+.bar{background:#e4ebf1;border-radius:999px;height:11px;margin-top:.3rem;overflow:hidden}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--secondary),var(--primary))}
+.meet{background:#fff8e6;border:1px dashed var(--accent);border-radius:8px;padding:.85rem 1.05rem;margin-top:1rem}
+.note{font-size:.85rem;color:#5c6b78}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.7rem;margin-top:.8rem}
+.info div{background:#f7fafc;border:1px solid var(--line);border-radius:8px;padding:.6rem .9rem}
+.mini{font-size:.82rem;padding:.3rem .7rem;background:#5a6c7d}
+.add{background:#1b998b}.del{background:#c94c4c}.b-file{background:#2a6f97}.b-link{background:#7b5ea7}
+.avatar{position:relative;width:76px;height:96px;margin:auto;border:2px dashed #b9c8d4;border-radius:8px;background:#f2f7fa;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar .ic{font-size:.72rem;color:#8ba0b1;text-align:center;line-height:1.3;padding:.2rem}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar.has{border-style:solid;border-color:var(--secondary)}
+body.edit .avatar{cursor:pointer}
+body.edit .avatar:hover{border-color:var(--accent)}
+.avatar.big{width:130px;height:165px}
+.rm{position:absolute;top:2px;right:2px;background:#c94c4c;color:#fff;border:none;border-radius:50%;width:22px;height:22px;line-height:1;font-size:.9rem;padding:0;cursor:pointer;display:none}
+body.edit .avatar.has .rm,body.edit .gitem .rm{display:block}
+.pcell{width:92px;text-align:center}
+.albbar{margin:.6rem 0}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.9rem;margin-top:.8rem}
+.gitem{position:relative;margin:0;background:#f7fafc;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.gitem img{width:100%;height:150px;object-fit:cover;display:block;cursor:zoom-in}
+.gitem figcaption{font-size:.84rem;padding:.45rem .6rem;color:#3d4d5a;min-height:2rem}
+.empty{color:#93a5b3;font-size:.88rem;padding:.6rem 0}
+.flink{display:inline-block;background:#e8f2f8;border:1px solid #bcd8e8;color:#1b5e82;text-decoration:none;padding:.25rem .65rem;border-radius:5px;font-size:.86rem;margin:.15rem .25rem .15rem 0;word-break:break-all}
+.flink:hover{background:#d5e9f4}
+.formdoc{font-size:.95rem}
+.formdoc .head{text-align:center;line-height:1.5}
+.formdoc .head b{font-size:1.12rem}
+.formdoc p{text-indent:2.2rem;margin:.55rem 0}
+.formdoc .chk{text-indent:0;margin:.3rem 0 .3rem 1.6rem}
+.dot{border-bottom:1px dotted #55707f;display:inline-block;min-width:150px}
+.sign{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.4rem;margin-top:1.8rem;text-align:center}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:99;padding:1.5rem}
+#lb.on{display:flex}
+#lb img{max-width:96%;max-height:88%;border-radius:8px}
+#lb .cl{position:absolute;top:14px;right:20px;font-size:2rem;color:#fff;cursor:pointer;background:none}
+.act,.edit-only{display:none}
+body.edit .act,body.edit .edit-only{display:revert}
+body.edit th.act{display:table-cell}
+body.edit .card{outline:2px dashed var(--accent);outline-offset:4px}
+footer{text-align:center;padding:1.4rem;color:#5c6b78;font-size:.85rem;line-height:1.7}
+@media print{
+ nav,.toolbar,footer,.act,.edit-only,#lb{display:none!important}
+ body{background:#fff}.card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+ header,.avatar,.gitem,.ob{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .gal{grid-template-columns:repeat(3,1fr)}
+ body.printall .page{display:block!important;page-break-after:always}
+ body.printone header{display:none}
+ body.printone .card{display:none!important;outline:none}
+ body.printone .card.ptarget{display:block!important;border:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>แผนพัฒนา รพ.สต. สังกัด อบจ.ลำปาง อำเภอเมืองปาน</h1>
+  <p>ระบบบริหารจัดการ การบริการ วิชาการ เครือข่ายสุขภาพ และพัฒนางานคุณภาพ (CQI) ปีงบประมาณ 2570</p>
+</header>
+
+<nav>
+  <div class="row" id="nav1"><span class="lbl">เมนูหลัก :</span></div>
+  <div class="row" id="nav2"><span class="lbl">หน้า รพ.สต. :</span></div>
+</nav>
+
+<div class="container">
+  <div class="toolbar">
+    <span id="usage"></span>
+    <button class="b-print" onclick="printPage()">พิมพ์หน้านี้ (PDF)</button>
+    <button class="b-all" onclick="printAll()">พิมพ์ทั้งเล่ม</button>
+    <button class="b-edit" id="editBtn" onclick="toggleEdit()">เปิดโหมดแก้ไข</button>
+    <button class="b-back" onclick="backup()">สำรองไฟล์</button>
+    <button class="b-reset" onclick="resetAll()">คืนค่าเริ่มต้น</button>
+  </div>
+  <div id="app"></div>
+</div>
+
+<footer>
+  เครือข่าย รพ.สต. สังกัด องค์การบริหารส่วนจังหวัดลำปาง อำเภอเมืองปาน<br>
+  ข้อมูลเขตปกครองและเครือข่ายความร่วมมือ อ้างอิงตามโครงสร้างสาธารณสุข อำเภอเมืองปาน จังหวัดลำปาง<br>
+  ภาพถ่ายและข้อมูลส่วนบุคคลได้รับความยินยอม และคุ้มครองตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
+</footer>
+
+<input type="file" id="picker" style="display:none">
+<div id="lb" onclick="this.classList.remove('on')"><span class="cl">&times;</span><img id="lbimg" alt=""></div>
+
+<script>
+/* ================= ข้อมูล รพ.สต. และผู้อำนวยการ ================= */
+const SITES=[
+ {id:'s1',name:'รพ.สต.บ้านทุ่งข่วง',dir:'นายพิศิษฐ์  ศรีแสง',pos:'นักวิชาการสาธารณสุขชำนาญการ'},
+ {id:'s2',name:'รพ.สต.บ้านป่าเวียง',dir:'น.ส.สาวิตรี  โสภะ',pos:'นักวิชาการสาธารณสุขชำนาญการ'},
+ {id:'s3',name:'รพ.สต.บ้านขาม',dir:'น.ส.จารุพักตร์  คันธา',pos:'พยาบาลวิชาชีพชำนาญการ'},
+ {id:'s4',name:'รพ.สต.บ้านต้นงุ้น',dir:'นางรัตนาพร  จางอรุณ',pos:'พยาบาลวิชาชีพชำนาญการ'},
+ {id:'s5',name:'รพ.สต.บ้านแจ้ซ้อนเหนือ',dir:'นายประสิทธิ์  อิ่มปัญญา',pos:'นักวิชาการสาธารณสุขชำนาญการ'}
+];
+
+const GROUPS=[
+ {cls:'t1',title:'1. กลุ่มบริหารสาธารณสุข (กรอบ 3 อัตรา)',rows:[
+  ['','นักวิชาการสาธารณสุข / นักสาธารณสุข','งานยุทธศาสตร์, ข้อมูลสารสนเทศ, มาตรฐานคุณภาพบริการ','งานแผนงาน โครงการ ตัวชี้วัด นิเทศงาน วิจัย นวัตกรรม พ.ร.บ.ข้อมูลข่าวสาร PCA 5ส.'],
+  ['','เจ้าพนักงานการเงินและบัญชี','งานการเงิน บัญชี พัสดุ และอาคารสถานที่','เบิกจ่ายงบประมาณ บัญชีเกณฑ์คงค้าง จัดซื้อจัดจ้าง ครุภัณฑ์ ที่ดิน สิ่งก่อสร้าง ซ่อมบำรุง'],
+  ['','เจ้าพนักงานธุรการ','งานธุรการ สารบรรณ และงานบริหารงานบุคคล','งานสารบรรณ รับ-ส่งหนังสือ ทะเบียนประวัติ วันลา พัฒนาบุคลากร สัมมนาฝึกอบรม'],
+  ['','(ตามที่ อบจ. กำหนดเพิ่มเติม)','งานหลักประกันสุขภาพ และกฎหมายสาธารณสุข','กองทุนหลักประกันสุขภาพ ตรวจสอบสิทธิ สัมพันธ์ชุมชน พ.ร.บ.การสาธารณสุข']
+ ]},
+ {cls:'t2',title:'2. กลุ่มส่งเสริมป้องกันควบคุมโรค (กรอบ 3 อัตรา)',rows:[
+  ['','นักวิชาการสาธารณสุข / นักสาธารณสุข หรือ เจ้าพนักงานสาธารณสุข','งานส่งเสริมสุขภาพตามกลุ่มวัย และแผนงาน','จัดทำแผนงาน อนามัยแม่และเด็ก สร้างเสริมภูมิคุ้มกันโรค วางแผนครอบครัว สุขศึกษา'],
+  ['','พยาบาลวิชาชีพ','งานป้องกันควบคุมโรค และอนามัยโรงเรียน','ควบคุมโรคติดต่อ/ไม่ติดต่อ แมลงนำโรค ระบาดวิทยา อนามัยโรงเรียน ศูนย์เด็กเล็ก'],
+  ['','นักวิชาการสาธารณสุข / นักสาธารณสุข หรือ เจ้าพนักงานทันตสาธารณสุข','งานคุ้มครองผู้บริโภค สิ่งแวดล้อม และทันตสาธารณสุข','อาหารปลอดภัย ตรวจสอบสารปนเปื้อน อนามัยสิ่งแวดล้อม อุบัติภัย ทันตกรรมชุมชน']
+ ]},
+ {cls:'t3',title:'3. กลุ่มเวชปฏิบัติครอบครัว (กรอบ 5 อัตรา)',rows:[
+  ['','พยาบาลวิชาชีพ','งานรักษาพยาบาลปฐมภูมิ','ตรวจรักษาโรคเบื้องต้น อุบัติเหตุฉุกเฉิน ให้คำปรึกษาด้านสุขภาพ'],
+  ['','พยาบาลวิชาชีพ','งานควบคุมการติดเชื้อ (IC) และส่งต่อ','งานป้องกันควบคุมการติดเชื้อในคลินิก คัดกรองและส่งต่อผู้ป่วย (EMS) สุขภาพจิต'],
+  ['','นักวิชาการสาธารณสุข / นักสาธารณสุข หรือ เจ้าพนักงานสาธารณสุข / ทันตฯ','งานเวชปฏิบัติครอบครัวในชุมชน','คัดกรองกลุ่มวัย ปรับเปลี่ยนพฤติกรรม HHC, Long Term Care, ยาเสพติด, TO BE NUMBER ONE'],
+  ['','แพทย์แผนไทย หรือ นักกายภาพบำบัด หรือ เจ้าพนักงานสาธารณสุข','งานฟื้นฟูสุขภาพ และแพทย์แผนไทย','ฟื้นฟูผู้พิการ ผู้สูงอายุ ผู้ป่วยติดบ้านติดเตียง แพทย์แผนไทย สมุนไพร'],
+  ['','นักวิชาการสาธารณสุข / นักสาธารณสุข หรือ เภสัชกร / เจ้าพนักงานเภสัชกรรม','งานเภสัชสาธารณสุข','คลังยาและเวชภัณฑ์ ให้คำปรึกษาการใช้ยา ความปลอดภัยด้านยาและเครื่องสำอาง']
+ ]}
+];
+
+const MAIN=[
+ ['home','หน้าหลัก'],
+ ['p1','1. ยุทธศาสตร์และนโยบาย'],
+ ['p2','2. โครงสร้างการพัฒนา'],
+ ['p3','3. ปฏิทินการประชุม'],
+ ['p4','4. แผนงานรายเดือน (ต.ค.69-ก.ย.70)'],
+ ['p5','5. เครือข่ายความร่วมมือและผู้ประสานงาน'],
+ ['p6','6. ขอบเขตพื้นที่ 3 ตำบล'],
+ ['p7','7. แผน CQI'],
+ ['p8','8. ตัวชี้วัด (KPIs)'],
+ ['p9','9. ภาพกิจกรรม'],
+ ['p10','10. ข่าว/หนังสือเวียน'],
+ ['p11','11. PDPA และแบบยินยอม'],
+ ['p12','12. แอปพลิเคชัน/เว็บไซต์ที่เกี่ยวข้อง']
+];
+
+/* ================= ฟังก์ชันส่วนย่อย ================= */
+function avatar(big){return `<div class="avatar${big?' big':''}" contenteditable="false" onclick="pickPhoto(this)"><span class="ic">คลิกเพื่อ<br>เพิ่มรูป</span><button class="rm" onclick="event.stopPropagation();rmPhoto(this)">&times;</button></div>`;}
+function pdpaBox(){return `<div class="warn"><b>ข้อพึงระวังตาม PDPA :</b> การเผยแพร่ภาพถ่ายและข้อมูลบุคลากรต้องได้รับความยินยอมเป็นลายลักษณ์อักษรจากเจ้าของข้อมูล โดยใช้แบบฟอร์มในหน้า “PDPA และแบบยินยอม”</div>`;}
+function staffTable(g){
+ const rows=g.rows.map(r=>`<tr><td class="pcell">${avatar()}</td><td>${r[0]||'(ระบุชื่อ–นามสกุล)'}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>`).join('');
+ return `<h3>${g.title}</h3>
+ <table class="${g.cls}"><thead><tr>
+ <th style="width:92px">ภาพถ่าย</th><th style="width:15%">ชื่อ – นามสกุล</th><th style="width:17%">ตำแหน่งตามกรอบอัตรากำลัง</th>
+ <th style="width:20%">งานที่รับผิดชอบ</th><th>กรอบงาน / ขอบเขตภารกิจ</th><th class="act" style="width:58px">จัดการ</th>
+ </tr></thead><tbody>${rows}</tbody></table>
+ <div class="edit-only" style="margin-top:.5rem"><button class="mini add" contenteditable="false" onclick="addRow(this)">+ เพิ่มแถวบุคลากร</button></div>`;
+}
+function orgChart(s){
+ return `<div class="org">
+  <div class="ob head">ผู้อำนวยการ ${s.name}<br><b>${s.dir}</b><br><span class="note">${s.pos}</span></div>
+  <div class="oline"></div><div class="obar"></div>
+  <div class="orow">
+   <div class="ob c1"><b>1. กลุ่มบริหารสาธารณสุข</b><br><span class="note">กรอบ 3 อัตรา</span></div>
+   <div class="ob c2"><b>2. กลุ่มส่งเสริมป้องกันควบคุมโรค</b><br><span class="note">กรอบ 3 อัตรา</span></div>
+   <div class="ob c3"><b>3. กลุ่มเวชปฏิบัติครอบครัว</b><br><span class="note">กรอบ 5 อัตรา</span></div>
+  </div>
+ </div>`;
+}
+function albumBlock(title){
+ return `<div class="card album">
+  <h3 style="margin-top:0">${title}</h3>
+  <div class="edit-only albbar"><button class="mini add" contenteditable="false" onclick="addPhotos(this)">+ เพิ่มภาพกิจกรรม</button> <span class="note">เลือกได้หลายไฟล์พร้อมกัน</span></div>
+  <div class="gal"><div class="empty">ยังไม่มีภาพในอัลบั้มนี้</div></div>
+ </div>`;
+}
+function newsRow(d,t,c){
+ return `<tr><td>${d}</td><td>${t}</td><td>${c}</td><td class="fcell"><span class="fbox"></span>
+ <div class="edit-only"><button class="mini b-file" contenteditable="false" onclick="attachFile(this)">แนบไฟล์</button>
+ <button class="mini b-link" contenteditable="false" onclick="attachLink(this)">แนบลิงก์</button></div></td>
+ <td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>`;
+}
+
+/* ================= หน้า รพ.สต. แต่ละแห่ง ================= */
+function sitePage(s){
+ return `<section class="page" id="${s.id}">
+ <div class="card">
+  <h2>${s.name}</h2>
+  <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:flex-start">
+   <div style="text-align:center">${avatar(true)}<div class="note" style="margin-top:.3rem">ภาพ ผอ.รพ.สต.</div></div>
+   <div class="info" style="flex:1;min-width:280px;margin-top:0">
+    <div><b>ผู้อำนวยการ รพ.สต. :</b> ${s.dir}</div>
+    <div><b>ตำแหน่ง :</b> ${s.pos}</div>
+    <div><b>ตำบลที่ตั้ง / เขตรับผิดชอบ :</b> (ระบุตำบลและหมู่บ้านในเขต)</div>
+    <div><b>ประชากรในเขตรับผิดชอบ :</b> (ระบุจำนวน) คน</div>
+    <div><b>บุคลากรที่มีอยู่จริง / ตามกรอบ :</b> (ระบุ) / (ระบุ) คน</div>
+    <div><b>โทรศัพท์ / ช่องทางติดต่อ :</b> (ระบุ)</div>
+   </div>
+  </div>
+  ${orgChart(s)}
+ </div>
+
+ <div class="card">
+  <h2>📊 ข้อมูลการดำเนินงานและงบประมาณ (${s.name})</h2>
+  <p class="note">ตารางเชื่อมโยงจาก Google Sheets ของหน่วยงาน สามารถแก้ไขในไฟล์ต้นฉบับเพื่อให้อัปเดตแสดงผลแบบเรียลไทม์</p>
+  <div class="embed-container">
+   <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT.../pubhtml?widget=true&amp;headers=false"></iframe>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>📅 ปฏิทินปฏิบัติงานและนัดหมายประจำเดือน (${s.name})</h2>
+  <p class="note">กำหนดการประชุม การลงพื้นที่เยี่ยมบ้าน และกิจกรรมของหน่วยบริการ</p>
+  <div class="embed-container">
+   <iframe src="https://calendar.google.com/calendar/embed?src=your_calendar_id%40group.calendar.google.com&ctz=Asia%2FBangkok" style="border:0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>โครงสร้างบุคลากรและกรอบงาน (3 กลุ่มงานตามประกาศโครงสร้างและอัตรากำลัง)</h2>
+  <p class="note">เปิดโหมดแก้ไข → คลิกกรอบรูปเพื่อใส่ภาพถ่าย และพิมพ์แก้ไขชื่อ–นามสกุล ตำแหน่ง และขอบเขตงานได้ทั้งหมด</p>
+  ${GROUPS.map(staffTable).join('')}
+  ${pdpaBox()}
+ </div>
+
+ <div class="card">
+  <h2>ผลงาน CQI และแผนพัฒนาคุณภาพประจำแห่ง</h2>
+  <table><thead><tr><th style="width:26%">หัวข้อ</th><th>รายละเอียด</th></tr></thead><tbody>
+   <tr><td><b>ชื่อเรื่อง CQI</b></td><td>(ระบุชื่อเรื่อง)</td></tr>
+   <tr><td><b>ผู้รับผิดชอบหลัก</b></td><td>(ระบุชื่อ–นามสกุล / ตำแหน่ง)</td></tr>
+   <tr><td><b>สภาพปัญหา</b></td><td>(สรุปปัญหาที่พบจากข้อมูลบริการหรือชุมชน)</td></tr>
+   <tr><td><b>เป้าหมาย / ตัวชี้วัด</b></td><td>(ระบุตัวชี้วัดและค่าเป้าหมาย)</td></tr>
+   <tr><td><b>ระยะเวลาดำเนินการ</b></td><td>ตุลาคม 2569 – มีนาคม 2570</td></tr>
+   <tr><td><b>สถานะปัจจุบัน</b></td><td>รอเสนอหัวข้อ</td></tr>
+  </tbody></table>
+ </div>
+ ${albumBlock('ภาพกิจกรรมของ '+s.name)}
+</section>`;
+}
+
+/* ================= สร้างหน้าทั้งหมด ================= */
+function buildApp(){
+ const home=`<section class="page on" id="home">
+  <div class="card">
+   <h2>ภาพรวมระบบบริหารจัดการ</h2>
+   <p>ศูนย์รวมแผนพัฒนา ระบบบริหารจัดการ โครงสร้างอัตรากำลัง ปฏิทินการทำงานร่วมกัน เครือข่ายสุขภาพ 3 ตำบล งานพัฒนาคุณภาพ (CQI) และการคุ้มครองข้อมูลส่วนบุคคล ของ รพ.สต. สังกัด อบจ.ลำปาง อำเภอเมืองปาน (5 แห่ง)</p>
+   <div class="quote"><b>เป้าหมายร่วม :</b> รพ.สต. ทั้ง 5 แห่ง มีผลงาน CQI ที่ผ่านการประเมินมาตรฐาน อย่างน้อยแห่งละ 1 เรื่อง ภายใน <b>มีนาคม 2570</b></div>
+  </div>
+  <div class="card">
+   <h2>ทำเนียบผู้อำนวยการ รพ.สต. เครือข่ายอำเภอเมืองปาน</h2>
+   <table><thead><tr><th style="width:92px">ภาพถ่าย</th><th style="width:26%">รพ.สต.</th><th style="width:26%">ชื่อ – นามสกุล</th><th>ตำแหน่ง</th></tr></thead><tbody>
+    ${SITES.map(s=>`<tr><td class="pcell">${avatar()}</td><td>${s.name}</td><td><b>${s.dir}</b></td><td>${s.pos}</td></tr>`).join('')}
+   </tbody></table>
+  </div>
+  <div class="card">
+   <h2>รพ.สต. ในเครือข่ายพัฒนา 5 แห่ง</h2>
+   <p class="note">คลิกที่ชื่อ รพ.สต. เพื่อเข้าสู่หน้าโครงสร้างบุคลากร กรอบงาน และภาพกิจกรรมของแต่ละแห่ง</p>
+   <div class="grid">${SITES.map((s,i)=>`<div class="hosp-card" onclick="go('${s.id}')"><b>${i+1}. ${s.name}</b><br><span class="note">ผอ. ${s.dir}<br>บุคลากร 3 กลุ่มงาน / กรอบงาน / ภาพกิจกรรม</span></div>`).join('')}</div>
+  </div>
+  <div class="card">
+   <h2>สรุปปฏิทินการประชุมและการทำงานร่วมกันประจำเดือน</h2>
+   <table><thead><tr><th style="width:30%">วันประชุม / กิจกรรม</th><th>กลุ่มเป้าหมาย / วาระหลัก</th></tr></thead><tbody>
+    <tr><td><b>ทุกวันอังคาร สัปดาห์แรกของเดือน</b></td><td><b>ประชุมเจ้าหน้าที่การเงินและพัสดุ</b> (ตรวจสอบงบประมาณ เบิกจ่าย พัสดุ ทรัพย์สิน)</td></tr>
+    <tr><td><b>ทุกวันพฤหัสบดีที่ 1 ของเดือน</b></td><td>ประชุม ผอ.รพ.สต. 5 แห่ง (นโยบาย อบจ.ลำปาง งบประมาณ ภาพรวม)</td></tr>
+    <tr><td><b>ทุกวันพฤหัสบดีที่ 2 ของเดือน</b></td><td>ประชุมเจ้าหน้าที่ 3 กลุ่มงาน (บริหารทั่วไป, ส่งเสริมป้องกันโรค, เวชปฏิบัติครอบครัว)</td></tr>
+    <tr><td><b>ทุกวันพฤหัสบดีที่ 3 ของเดือน</b></td><td>ประชุมระบบ IT และสารสนเทศสุขภาพ (ฐานข้อมูล HDC / อบจ.)</td></tr>
+   </tbody></table>
+   <div class="meet"><b>กำหนดการประชุมประจำเดือนนี้ :</b> <span id="meetDates">-</span></div>
+  </div>
+ </section>`;
+
+ const p1=`<section class="page" id="p1"><div class="card">
+  <h2>หมวดที่ 1 : ทิศทางยุทธศาสตร์และนโยบาย</h2>
+  <h3>วิสัยทัศน์ (Vision)</h3>
+  <div class="quote">“ยกระดับระบบบริการสุขภาพปฐมภูมิ รพ.สต. สังกัด อบจ.ลำปาง อำเภอเมืองปาน ให้ได้มาตรฐาน มีคุณภาพ มุ่งสู่องค์กรแห่งการเรียนรู้ ชุมชนมีความรอบรู้ด้านสุขภาพ และเข้าถึงบริการอย่างเท่าเทียม”</div>
+  <h3>พันธกิจ (Mission)</h3>
+  <ul>
+   <li>พัฒนาระบบบริหารจัดการและบริการปฐมภูมิของ รพ.สต. ให้ได้มาตรฐานและมีประสิทธิภาพ</li>
+   <li>ส่งเสริมการมีส่วนร่วมของภาคีเครือข่ายและชุมชน ขับเคลื่อนธรรมนูญสุขภาพและสุขภาวะ</li>
+   <li>พัฒนานวัตกรรม ระบบสารสนเทศ (IT) และงานพัฒนาคุณภาพอย่างต่อเนื่อง (CQI)</li>
+   <li>ยกระดับการส่งเสริมสุขภาพ ป้องกันโรค และการดูแลกลุ่มวัย ผู้สูงอายุ ผู้ป่วยติดบ้านติดเตียง</li>
+  </ul>
+  <h3>นโยบายที่สอดคล้องกับ อบจ.ลำปาง ด้านสาธารณสุข</h3>
+  <div class="policy"><b>Policy 1 :</b> การถ่ายโอนและยกระดับคุณภาพบริการ รพ.สต. ให้เป็นหน่วยบริการปฐมภูมิใกล้บ้านใกล้ใจ</div>
+  <div class="policy"><b>Policy 2 :</b> บูรณาการงานสาธารณสุขร่วมกับระบบธนาคารเวลา สวัสดิการชุมชน และการดูแลผู้สูงอายุ/ผู้ป่วยติดบ้านติดเตียง</div>
+  <div class="policy"><b>Policy 3 :</b> พัฒนาระบบข้อมูลสารสนเทศสุขภาพดิจิทัล (Digital Health) เพื่อการตัดสินใจและให้บริการประชาชน</div>
+  <div class="policy"><b>Policy 4 :</b> ขับเคลื่อนความรอบรู้ด้านสุขภาพ (Health Literacy) และลดปัจจัยเสี่ยง (เหล้า บุหรี่ อุบัติเหตุ ยาเสพติด)</div>
+ </div></section>`;
+
+ const p2=`<section class="page" id="p2">
+ <div class="card">
+  <h2>หมวดที่ 2 : โครงสร้างการพัฒนา รพ.สต.</h2>
+  <h3>คณะกรรมการอำนวยการและขับเคลื่อนพัฒนา รพ.สต. อำเภอเมืองปาน</h3>
+  <table><thead><tr><th style="width:92px">ภาพถ่าย</th><th style="width:26%">ตำแหน่งในคณะกรรมการ</th><th style="width:22%">ชื่อ – นามสกุล</th><th style="width:20%">ตำแหน่งในสายงาน</th><th>บทบาทหน้าที่</th></tr></thead><tbody>
+   <tr><td class="pcell">${avatar()}</td><td>ประธาน / ผู้ประสานงานพัฒนา รพ.สต. อ.เมืองปาน</td><td>(ระบุ)</td><td>(ระบุ)</td><td>กำกับทิศทาง นโยบาย และประสานงานกับ อบจ.ลำปาง</td></tr>
+   ${SITES.map(s=>`<tr><td class="pcell">${avatar()}</td><td>ผู้อำนวยการ ${s.name}</td><td><b>${s.dir}</b></td><td>${s.pos}</td><td>กรรมการ / ขับเคลื่อนแผนพัฒนาในพื้นที่</td></tr>`).join('')}
+  </tbody></table>
+  ${pdpaBox()}
+ </div>
+ <div class="card">
+  <h2>กรอบอัตรากำลังตามประกาศโครงสร้าง (สนอ./รพ.สต. ขนาดกลาง 12 อัตรา)</h2>
+  <table><thead><tr><th style="width:28%">กลุ่มงาน</th><th style="width:12%">จำนวน</th><th>ตำแหน่งตามกรอบ</th></tr></thead><tbody>
+   <tr><td><b>ผู้อำนวยการ สนอ./รพ.สต.</b></td><td>1 อัตรา</td><td>นักวิชาการสาธารณสุขชำนาญการขึ้นไป หรือ พยาบาลวิชาชีพชำนาญการขึ้นไป หรือ นักสาธารณสุขชำนาญการขึ้นไป</td></tr>
+   <tr><td><b>1. กลุ่มบริหารสาธารณสุข</b></td><td>3 อัตรา</td><td>นักวิชาการสาธารณสุข / นักสาธารณสุข 1 | เจ้าพนักงานการเงินและบัญชี 1 | เจ้าพนักงานธุรการ 1</td></tr>
+   <tr><td><b>2. กลุ่มส่งเสริมป้องกันควบคุมโรค</b></td><td>3 อัตรา</td><td>นักวิชาการสาธารณสุข/นักสาธารณสุข/เจ้าพนักงานสาธารณสุข 1 | นักวิชาการสาธารณสุข/นักสาธารณสุข/เจ้าพนักงานทันตสาธารณสุข 1 | พยาบาลวิชาชีพ 1</td></tr>
+   <tr><td><b>3. กลุ่มเวชปฏิบัติครอบครัว</b></td><td>5 อัตรา</td><td>นักวิชาการสาธารณสุข/นักสาธารณสุข/เจ้าพนักงานสาธารณสุข/ทันตฯ 1 | แพทย์แผนไทย/นักกายภาพบำบัด/เจ้าพนักงานสาธารณสุข 1 | นักวิชาการสาธารณสุข/นักสาธารณสุข/เภสัชกร/เจ้าพนักงานเภสัชกรรม 1 | พยาบาลวิชาชีพ 2</td></tr>
+   <tr><td colspan="2"><b>รวมทั้งสิ้น</b></td><td><b>12 อัตรา</b></td></tr>
+  </table>
+  <p class="note">หมายเหตุ : ตำแหน่งที่ระบุ “หรือ” คือสายงานที่สามารถเลือกกำหนดตำแหน่งได้ตามความเหมาะสมของ อบจ.</p>
+ </div></section>`;
+
+ const p3=`<section class="page" id="p3"><div class="card">
+  <h2>หมวดที่ 3 : แผนปฏิบัติการและปฏิทินการประชุมประจำเดือน</h2>
+  <p class="note">ตารางการประชุมร่วมกันเพื่อขับเคลื่อนนโยบาย ติดตามงาน และพัฒนาคุณภาพประจำเดือน</p>
+  <table><thead><tr><th style="width:24%">วันประชุม / ช่วงเวลา</th><th>กลุ่มเป้าหมาย / วาระการประชุม</th><th style="width:26%">ผู้รับผิดชอบหลัก</th></tr></thead><tbody>
+   <tr><td><b>ทุกวันอังคาร สัปดาห์แรกของเดือน</b></td><td><strong>ประชุมเจ้าหน้าที่การเงินและพัสดุ</strong><br>- ตรวจสอบงบประมาณ เบิกจ่าย และการจัดซื้อจัดจ้าง<br>- ตรวจสอบทะเบียนพัสดุ ครุภัณฑ์ และบัญชีเกณฑ์คงค้าง</td><td>หัวหน้างานการเงินและพัสดุ รพ.สต. ทั้ง 5 แห่ง</td></tr>
+   <tr><td><b>ทุกวันพฤหัสบดีที่ 1 ของเดือน</b></td><td><strong>ประชุม ผอ.รพ.สต. 5 แห่ง</strong><br>- วางแผนยุทธศาสตร์ตามนโยบาย อบจ.ลำปาง<br>- ติดตามงบประมาณและตัวชี้วัดภาพรวม</td><td>ประธาน/ผู้ประสานงาน อ.เมืองปาน และ ผอ.รพ.สต. 5 แห่ง</td></tr>
+   <tr><td><b>ทุกวันพฤหัสบดีที่ 2 ของเดือน</b></td><td><strong>ประชุมเจ้าหน้าที่ 3 กลุ่มงาน</strong><br>- กลุ่มบริหารสาธารณสุข<br>- กลุ่มส่งเสริมป้องกันควบคุมโรค<br>- กลุ่มเวชปฏิบัติครอบครัว</td><td>หัวหน้ากลุ่มงาน / เจ้าหน้าที่ผู้รับผิดชอบงาน</td></tr>
+   <tr><td><b>ทุกวันพฤหัสบดีที่ 3 ของเดือน</b></td><td><strong>ประชุมระบบ IT และสารสนเทศสุขภาพ</strong><br>- การจัดการฐานข้อมูลสุขภาพ ส่งออก HDC / อบจ.<br>- พัฒนาระบบดิจิทัลและการเชื่อมโยงข้อมูล</td><td>ทีมสารสนเทศ (IT) รพ.สต. ทั้ง 5 แห่ง</td></tr>
+  </tbody></table>
+ </div></section>`;
+
+ const p4=`<section class="page" id="p4">
+ <div class="card">
+  <h2>หมวดที่ 4 : แผนการดำเนินงานรายเดือน (ตุลาคม 2569 – กันยายน 2570)</h2>
+  <p class="note">กรอบระยะเวลาและภารกิจสำคัญตลอดปีงบประมาณ 2570 ของเครือข่าย รพ.สต. อ.เมืองปาน</p>
+  <table><thead><tr><th style="width:18%">ห้วงเวลา</th><th style="width:38%">ภารกิจหลัก / กิจกรรมสำคัญ</th><th>เป้าหมาย / ผลลัพธ์ที่คาดหวัง</th></tr></thead><tbody>
+   <tr><td><b>ตุลาคม 2569</b><br>(ไตรมาส 1 / เดือนที่ 1)</td><td>
+    <ul>
+     <li>จัดทำแผนปฏิบัติการประจำปีงบประมาณ 2570 ของเครือข่าย</li>
+     <li>ทบทวนบริบทพื้นที่ วิเคราะห์ปัญหาบริการและสุขภาพชุมชน</li>
+     <li>แต่งตั้งคณะกรรมการขับเคลื่อนและคณะทำงาน 3 กลุ่มงาน</li>
+    </ul>
+   </td><td>แผนปฏิบัติการประจำปี และคำสั่งแต่งตั้งคณะทำงานครบถ้วน</td></tr>
+   <tr><td><b>พฤศจิกายน 2569</b><br>(ไตรมาส 1 / เดือนที่ 2)</td><td>
+    <ul>
+     <li>คัดเลือกหัวข้อและจัดทำโครงการ CQI ของ รพ.สต. ทั้ง 5 แห่ง (แห่งละ 1 เรื่อง)</li>
+     <li>วางระบบจัดเก็บข้อมูลสุขภาพและเชื่อมโยง HDC / อบจ.ลำปาง</li>
+     <li>สำรวจกลุ่มเป้าหมายผู้สูงอายุ / ผู้ป่วยติดบ้านติดเตียง (LTC)</li>
+    </ul>
+   </td><td>โครงการ CQI ฉบับร่าง และข้อมูลกลุ่มเป้าหมายเป็นปัจจุบัน</td></tr>
+   <tr><td><b>ธันวาคม 2569</b><br>(ไตรมาส 1 / เดือนที่ 3)</td><td>
+    <ul>
+     <li>เสนอขออนุมัติโครงการ CQI ต่อผู้บริหารและคณะกรรมการ</li>
+     <li>สรุปผลการดำเนินงานไตรมาสที่ 1 ประเมินตัวชี้วัดรอบ 3 เดือน</li>
+     <li>กิจกรรมรณรงค์ป้องกันโรคในฤดูหนาวและตรวจสุขภาพประจำปี</li>
+    </ul>
+   </td><td>โครงการ CQI ได้รับอนุมัติ และรายงานผล Q1</td></tr>
+   <tr><td><b>มกราคม 2570</b><br>(ไตรมาส 2 / เดือนที่ 4)</td><td>
+    <ul>
+     <li>เริ่มดำเนินงานและทดลองใช้นวัตกรรม/แนวทางปรับปรุงตามโครงการ CQI</li>
+     <li>ขับเคลื่อนงานธนาคารเวลาและโรงเรียนผู้สูงอายุร่วมกับท้องถิ่น</li>
+     <li>ออกเยี่ยมบ้านและประเมินสุขภาพกลุ่มเป้าหมายเชิงรุก</li>
+    </ul>
+   </td><td>การดำเนินงาน CQI ระยะเริ่มต้นในพื้นที่จริง</td></tr>
+   <tr><td><b>กุมภาพันธ์ 2570</b><br>(ไตรมาส 2 / เดือนที่ 5)</td><td>
+    <ul>
+     <li>ติดตามความก้าวหน้าโครงการ CQI และแก้ปัญหาอุปสรรคหน้างาน</li>
+     <li>จัดมหกรรมสุขภาพชุมชน / คัดกรอง NCDs เชิงรุก</li>
+     <li>เตรียมการประเมินผลงานวิชาการและนวัตกรรมระดับอำเภอ</li>
+    </ul>
+   </td><td>ข้อมูลความก้าวหน้า CQI และกิจกรรมเชิงรุกในชุมชน</td></tr>
+   <tr><td><b>มีนาคม 2570</b><br>(ไตรมาส 2 / เดือนที่ 6)</td><td>
+    <ul>
+     <li><b>สรุปผลงาน CQI และประเมินมาตรฐาน (เป้าหมายสูงสุดภายใน มี.ค. 2570)</b></li>
+     <li>ถอดบทเรียน CQI ของ รพ.สต. ทั้ง 5 แห่ง และจัดทำเล่มรายงานสมบูรณ์</li>
+     <li>สรุปผลการดำเนินงานรอบครึ่งปี (Q2) ส่งมอบ อบจ.ลำปาง</li>
+    </ul>
+   </td><td><b>เล่มรายงานผลงาน CQI สมบูรณ์ 5 แห่ง พร้อมส่งมอบ อบจ.ลำปาง</b></td></tr>
+   <tr><td><b>เมษายน 2570</b><br>(ไตรมาส 3 / เดือนที่ 7)</td><td>
+    <ul>
+     <li>ทบทวนและปรับปรุงแผนงานรอบ 6 เดือนหลัง</li>
+     <li>รณรงค์ป้องกันโรคในช่วงเทศกาลสงกรานต์และควบคุมโรคติดต่อทางเดินอาหาร</li>
+     <li>ประชุมสรุปผลการประเมิน CQI และแลกเปลี่ยนเรียนรู้ระหว่าง 5 รพ.สต.</li>
+    </ul>
+   </td><td>แผนงานปรับปรุงครึ่งปีหลัง และรายงานความปลอดภัยช่วงสงกรานต์</td></tr>
+   <tr><td><b>พฤษภาคม 2570</b><br>(ไตรมาส 3 / เดือนที่ 8)</td><td>
+    <ul>
+     <li>เตรียมความพร้อมรับเปิดเทอม (อนามัยโรงเรียน, ควบคุมโรคในศูนย์เด็กเล็ก)</li>
+     <li>ออกหน่วยบริการสร้างเสริมภูมิคุ้มกันโรคและตรวจสุขภาพเชิงรุก</li>
+     <li>ประเมินตัวชี้วัดรอบ 8 เดือน</li>
+    </ul>
+   </td><td>สถานบริการและโรงเรียนในเขตรับผิดชอบมีความพร้อมด้านสาธารณสุข</td></tr>
+   <tr><td><b>มิถุนายน 2570</b><br>(ไตรมาส 3 / เดือนที่ 9)</td><td>
+    <ul>
+     <li>สรุปผลการดำเนินงานไตรมาสที่ 3 และประเมินงบประมาณการเบิกจ่าย</li>
+     <li>ติดตามงานคุ้มครองผู้บริโภคและสุขาภิบาลอาหารในตลาด/ร้านค้า</li>
+     <li>เตรียมจัดเวทีแลกเปลี่ยนเรียนรู้ (KM) ระดับอำเภอ</li>
+    </ul>
+   </td><td>รายงานผลงาน Q3 และข้อมูลการเบิกจ่ายงบประมาณ</td></tr>
+   <tr><td><b>กรกฎาคม 2570</b><br>(ไตรมาส 4 / เดือนที่ 10)</td><td>
+    <ul>
+     <li>ขับเคลื่อนงานป้องกันโรคไข้เลือดออกและโรคตามฤดูฝน</li>
+     <li>ทบทวนฐานข้อมูล HDC เตรียมความพร้อมปิดงบประมาณประจำปี</li>
+     <li>สำรวจความพึงพอใจของประชาชนผู้รับบริการรอบปี</li>
+    </ul>
+   </td><td>แผนควบคุมโรคฤดูฝนและข้อมูลความพึงพอใจเบื้องต้น</td></tr>
+   <tr><td><b>สิงหาคม 2570</b><br>(ไตรมาส 4 / เดือนที่ 11)</td><td>
+    <ul>
+     <li>สรุปผลการสำรวจความพึงพอใจของประชาชน (เป้าไม่น้อยกว่าร้อยละ 85)</li>
+     <li>จัดทำร่างแผนพัฒนา รพ.สต. และคำของบประมาณประจำปีถัดไป</li>
+     <li>ประเมินตัวชี้วัดภาพรวมทั้งหมดของเครือข่าย</li>
+    </ul>
+   </td><td>รายงานผลความพึงพอใจและร่างแผนปีงบประมาณถัดไป</td></tr>
+   <tr><td><b>กันยายน 2570</b><br>(ไตรมาส 4 / เดือนที่ 12)</td><td>
+    <ul>
+     <li><b>สรุปผลการดำเนินงานประจำปีงบประมาณ 2570 ทั้ง 5 แห่ง</b></li>
+     <li>จัดทำรายงานภาพรวมผลการพัฒนา รพ.สต. สังกัด อบจ.ลำปาง อ.เมืองปาน</li>
+     <li>ส่งมอบเล่มรายงานประจำปีและปิดงบประมาณปี 2570</li>
+    </ul>
+   </td><td><b>รายงานสรุปผลการดำเนินงานประจำปี 2570 ฉบับสมบูรณ์</b></td></tr>
+  </tbody></table>
+ </div></section>`;
+
+ const p5=`<section class="page" id="p5">
+ <div class="card">
+  <h2>หมวดที่ 5 : เครือข่ายความร่วมมือและผู้ประสานงาน</h2>
+  <p class="note">รายชื่อผู้ประสานงานและภาคีเครือข่ายสุขภาพระดับอำเภอและตำบล สามารถกดเพิ่มแถวเพื่อบันทึกข้อมูลเพิ่มเติมได้</p>
+  
+  <table><thead><tr>
+   <th style="width:25%">ประเภทเครือข่าย / องค์กร</th>
+   <th style="width:25%">ชื่อ – นามสกุล ผู้ประสานงาน</th>
+   <th style="width:25%">ตำแหน่ง / สังกัด</th>
+   <th style="width:20%">เบอร์โทรศัพท์ติดต่อ</th>
+   <th class="act" style="width:58px">จัดการ</th>
+  </tr></thead><tbody>
+   <tr><td><b>กองสาธารณสุข อบจ.ลำปาง</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>(ระบุตำแหน่ง)</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>คณะกรรมการพัฒนาคุณภาพชีวิต (พชอ.)</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>(ระบุตำแหน่ง)</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>รพ.เมืองปาน / สสอ.เมืองปาน</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>(ระบุตำแหน่ง)</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>กองทุนหลักประกันสุขภาพท้องถิ่น (กปท.)</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>(ระบุตำแหน่ง)</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>ชมรม อสม. อำเภอเมืองปาน</b></td><td>(ระบุชื่อประธาน/ผู้ประสานงาน)</td><td>ประธานชมรม อสม. / อสม.</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>ชมรมผู้สูงอายุ / โรงเรียนผู้สูงอายุ</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>ประธานชมรม / ผู้รับผิดชอบ</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>ชมรมผู้พิการ</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>ผู้ประสานงานชมรมผู้พิการ</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+   <tr><td><b>โครงการพฤฒพลัง (Active Aging)</b></td><td>(ระบุชื่อผู้ประสานงาน)</td><td>ผู้รับผิดชอบโครงการ</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>
+  </tbody></table>
+  <div class="edit-only" style="margin-top:.6rem"><button class="mini add" contenteditable="false" onclick="addNetwork(this)">+ เพิ่มภาคีเครือข่าย</button></div>
+ </div></section>`;
+
+ const p6=`<section class="page" id="p6">
+ <div class="card">
+  <h2>หมวดที่ 6 : ขอบเขตพื้นที่และข้อมูลหมู่บ้าน 3 ตำบลเครือข่าย</h2>
+  <p class="note">รายชื่อหมู่บ้านในเขตรับผิดชอบของตำบลเครือข่าย รพ.สต. อำเภอเมืองปาน จังหวัดลำปาง</p>
+
+  <h3>1. ตำบลทุ่งกว๋าว (14 หมู่บ้าน)</h3>
+  <table><thead><tr><th style="width:10%">หมู่ที่</th><th style="width:40%">ชื่อหมู่บ้าน</th><th>รพ.สต. / หน่วยบริการที่รับผิดชอบ</th></tr></thead><tbody>
+   <tr><td>หมู่ที่ 1</td><td>บ้านถ้ำ</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 2</td><td>บ้านทุ่งข่วง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 3</td><td>บ้านทุ่งแท่น</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 4</td><td>บ้านจ๋ง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 5</td><td>บ้านทุ่งกว๋าว</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 6</td><td>บ้านทุ่งปง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 7</td><td>บ้านปลายนา</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 8</td><td>บ้านทุ่งจี้</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 9</td><td>บ้านเฮี้ย</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 10</td><td>บ้านหัวทุ่ง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 11</td><td>บ้านป่าเวียง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 12</td><td>บ้านแพะใหม่</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 13</td><td>บ้านหลวง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 14</td><td>บ้านทุ่งจี้ศรีเจริญ</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:1.8rem">2. ตำบลแจ้ซ้อน (14 หมู่บ้าน)</h3>
+  <table><thead><tr><th style="width:10%">หมู่ที่</th><th style="width:40%">ชื่อหมู่บ้าน</th><th>รพ.สต. / หน่วยบริการที่รับผิดชอบ</th></tr></thead><tbody>
+   <tr><td>หมู่ที่ 1</td><td>บ้านแม่แจ๋ม</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 2</td><td>บ้านศรีดอนมูล</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 3</td><td>บ้านดินดำ</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 4</td><td>บ้านทุ่ง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 5</td><td>บ้านหลวง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 6</td><td>บ้านสบลี</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 7</td><td>บ้านป่าเหมี้ยง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 8</td><td>บ้านใหม่พัฒนา</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 9</td><td>บ้านข่วงกอม</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 10</td><td>บ้านปางต้นหนุน</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 11</td><td>บ้านแจ้ซ้อนเหนือ</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 12</td><td>บ้านแจ้ซ้อน</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 13</td><td>บ้านปางม่วง (หรือปางม่วง-แม่จอก)</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 14</td><td>บ้านใหม่สันติสุข</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+  </tbody></table>
+
+  <h3 style="margin-top:1.8rem">3. ตำบลหัวเมือง (9 หมู่บ้าน)</h3>
+  <table><thead><tr><th style="width:10%">หมู่ที่</th><th style="width:40%">ชื่อหมู่บ้าน</th><th>รพ.สต. / หน่วยบริการที่รับผิดชอบ</th></tr></thead><tbody>
+   <tr><td>หมู่ที่ 1</td><td>บ้านขาม</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 2</td><td>บ้านกล้วย</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 3</td><td>บ้านต้นงุ้น</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 4</td><td>บ้านไร่</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 5</td><td>บ้านหัวเมือง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 6</td><td>บ้านทุ่งยาง</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 7</td><td>บ้านท่าเดื่อ</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 8</td><td>บ้านแม่ต๋อม</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+   <tr><td>หมู่ที่ 9</td><td>บ้านไร่เหนือ</td><td>(ระบุ รพ.สต. ในสังกัด)</td></tr>
+  </tbody></table>
+ </div></section>`;
+
+ const p7=`<section class="page" id="p7"><div class="card">
+  <h2>หมวดที่ 7 : แผนพัฒนามาตรฐาน คุณภาพชีวิต และ CQI</h2>
+  <div class="quote"><b>เป้าหมายใหญ่ :</b> รพ.สต. ทั้ง 5 แห่ง ดำเนินงาน CQI อย่างน้อยแห่งละ 1 เรื่อง ให้แล้วเสร็จภายใน <b>มีนาคม 2570</b></div>
+  <h3>กรอบเวลาการดำเนินงาน (ปีงบประมาณ 2570)</h3>
+  <div class="tl">
+   <div class="s"><span class="ph">ต.ค. 2569</span><br><b>วิเคราะห์ปัญหา</b><br>ทบทวนบริบทพื้นที่ วิเคราะห์ข้อมูลบริการและสุขภาพชุมชน</div>
+   <div class="s"><span class="ph">พ.ย.–ธ.ค. 2569</span><br><b>จัดทำโครงการ CQI</b><br>เขียนโครงการ กำหนดตัวชี้วัด เสนอขออนุมัติ</div>
+   <div class="s"><span class="ph">ม.ค.–ก.พ. 2570</span><br><b>ดำเนินงาน/ทดลองปรับปรุง</b><br>ทดสอบนวัตกรรมบริการในพื้นที่จริง</div>
+   <div class="s"><span class="ph">มี.ค. 2570</span><br><b>สรุปผล/ประเมินมาตรฐาน</b><br>ถอดบทเรียน จัดทำเล่มรายงานส่งมอบ อบจ.ลำปาง</div>
+  </div>
+  <h3>กระบวนการ CQI 5 ขั้นตอน</h3>
+  <table><thead><tr><th style="width:26%">ขั้นตอน</th><th>รายละเอียดการดำเนินงาน</th></tr></thead><tbody>
+   <tr><td><b>1. ค้นหาปัญหา</b> (Identify)</td><td>วิเคราะห์จากข้อมูลบริการ ผู้ป่วยติดบ้านติดเตียง หรือพฤติกรรมสุขภาพชุมชน</td></tr>
+   <tr><td><b>2. วางแผนแก้ไข</b> (Plan)</td><td>กำหนดเป้าหมาย ตัวชี้วัด และวิธีการปรับปรุง</td></tr>
+   <tr><td><b>3. ลงมือปฏิบัติ</b> (Do)</td><td>ทดลองใช้นวัตกรรม/แนวทางใหม่ใน รพ.สต.</td></tr>
+   <tr><td><b>4. ตรวจสอบประเมินผล</b> (Check)</td><td>วัดผลตัวชี้วัดเปรียบเทียบก่อน–หลังดำเนินการ</td></tr>
+   <tr><td><b>5. ปรับเป็นมาตรฐาน</b> (Act)</td><td>สรุปผลเป็นนวัตกรรม CQI จัดทำเล่มรายงานส่งมอบ อบจ.ลำปาง</td></tr>
+  </tbody></table>
+  <h3>ตารางติดตามความก้าวหน้า CQI ภาพรวม 5 แห่ง</h3>
+  <table><thead><tr><th style="width:20%">รพ.สต.</th><th style="width:22%">ผู้อำนวยการ</th><th>ชื่อเรื่อง CQI</th><th style="width:16%">ผู้รับผิดชอบ</th><th style="width:14%">สถานะ</th></tr></thead><tbody>
+   ${SITES.map(s=>`<tr><td>${s.name}</td><td>${s.dir}</td><td>(ระบุ)</td><td>(ระบุ)</td><td>รอเสนอหัวข้อ</td></tr>`).join('')}
+  </tbody></table>
+ </div></section>`;
+
+ const p8=`<section class="page" id="p8"><div class="card">
+  <h2>หมวดที่ 8 : ตัวชี้วัดความสำเร็จ (KPIs)</h2>
+  <div class="kpi"><div class="kpi-h"><span>KPI 1 : รพ.สต. ประชุมตามปฏิทินครบถ้วน (การเงิน, พฤหัสฯ 1, 2, 3)</span><span>เป้า 100%</span></div><div class="bar"><span style="width:100%"></span></div></div>
+  <div class="kpi"><div class="kpi-h"><span>KPI 2 : มีเล่มผลงาน CQI ผ่านการประเมินภายใน มี.ค. 2570</span><span>เป้า 100%</span></div><div class="bar"><span style="width:100%"></span></div></div>
+  <div class="kpi"><div class="kpi-h"><span>KPI 3 : ความพึงพอใจของประชาชนผู้รับบริการ</span><span>เป้า ≥ 85%</span></div><div class="bar"><span style="width:85%"></span></div></div>
+  <div class="kpi"><div class="kpi-h"><span>KPI 4 : ข้อมูลสารสนเทศสุขภาพถูกต้อง ครอบคลุม ส่งออกได้ตามมาตรฐาน</span><span>เป้า ≥ 90%</span></div><div class="bar"><span style="width:90%"></span></div></div>
+  <h3>แบบติดตามผลรายไตรมาส</h3>
+  <table><thead><tr><th>ตัวชี้วัด</th><th>ไตรมาส 1</th><th>ไตรมาส 2</th><th>ไตรมาส 3</th><th>ไตรมาส 4</th></tr></thead><tbody>
+   <tr><td>KPI 1</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+   <tr><td>KPI 2</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+   <tr><td>KPI 3</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+   <tr><td>KPI 4</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+  </tbody></table>
+ </div></section>`;
+
+ const p9=`<section class="page" id="p9">
+  <div class="card">
+   <h2>หมวดที่ 9 : ภาพกิจกรรมเครือข่าย รพ.สต. อำเภอเมืองปาน</h2>
+   <p class="note">บันทึกภาพการประชุม การอบรม การเยี่ยมบ้าน กิจกรรมส่งเสริมสุขภาพ และผลงาน CQI เพื่อใช้ประกอบเล่มรายงานส่งมอบ อบจ.ลำปาง</p>
+   ${pdpaBox()}
+  </div>
+  ${albumBlock('อัลบั้มกิจกรรมส่วนกลาง (ประชุม / อบรม / นิเทศงาน)')}
+  ${SITES.map(s=>albumBlock('อัลบั้มกิจกรรม '+s.name)).join('')}
+ </section>`;
+
+ const p10=`<section class="page" id="p10">
+  <div class="card">
+   <h2>หมวดที่ 10 : ข่าวประชาสัมพันธ์และหนังสือเวียน</h2>
+   <p class="note">ทะเบียนหนังสือเวียน ประกาศ คำสั่ง และเอกสารประกอบการประชุม</p>
+   <table><thead><tr>
+    <th style="width:13%">วันที่</th><th style="width:36%">เรื่อง / สาระสำคัญ</th><th style="width:15%">ประเภทเอกสาร</th><th>ไฟล์แนบ / ลิงก์เอกสาร</th><th class="act" style="width:58px">จัดการ</th>
+   </tr></thead><tbody>
+    ${newsRow('(วัน/เดือน/ปี)','ประกาศโครงสร้างและอัตรากำลังบุคลากร สนอ./รพ.สต.','ประกาศ/คำสั่ง')}
+    ${newsRow('(วัน/เดือน/ปี)','(ระบุชื่อเรื่องหนังสือเวียน)','หนังสือเวียน')}
+   </tbody></table>
+   <div class="edit-only" style="margin-top:.6rem"><button class="mini add" contenteditable="false" onclick="addNews(this)">+ เพิ่มรายการหนังสือ</button></div>
+  </div>
+ </section>`;
+
+ const p11=`<section class="page" id="p11">
+  <div class="card">
+   <h2>หมวดที่ 11 : การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</h2>
+   <h3>ประกาศความเป็นส่วนตัว (Privacy Notice)</h3>
+   <p>เครือข่าย รพ.สต. สังกัด อบจ.ลำปาง อำเภอเมืองปาน ในฐานะผู้ควบคุมข้อมูลส่วนบุคคล ดำเนินการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 โดยจำกัดเฉพาะภารกิจด้านสาธารณสุขและการเผยแพร่ผลงานพัฒนาเท่านั้น</p>
+  </div>
+  <div class="card ptarget formdoc">
+   <div class="edit-only" style="text-align:right;margin-bottom:.5rem"><button class="mini b-file" contenteditable="false" onclick="printForm()">พิมพ์เฉพาะแบบฟอร์มนี้</button></div>
+   <div class="head">
+    <b>หนังสือให้ความยินยอมในการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลและภาพถ่าย</b><br>
+    โรงพยาบาลส่งเสริมสุขภาพตำบล สังกัดองค์การบริหารส่วนจังหวัดลำปาง อำเภอเมืองปาน
+   </div>
+   <p style="text-align:right;text-indent:0;margin-top:1.2rem">เขียนที่ <span class="dot">&nbsp;</span><br>วันที่ <span class="dot" style="min-width:40px">&nbsp;</span> เดือน <span class="dot" style="min-width:110px">&nbsp;</span> พ.ศ. <span class="dot" style="min-width:70px">&nbsp;</span></p>
+   <p>ข้าพเจ้า (นาย/นาง/นางสาว) <span class="dot" style="min-width:260px">&nbsp;</span> ตำแหน่ง <span class="dot" style="min-width:200px">&nbsp;</span> สังกัด <span class="dot" style="min-width:300px">&nbsp;</span></p>
+   <p>ขอให้ความยินยอมแก่เครือข่าย รพ.สต. สังกัด อบจ.ลำปาง อำเภอเมืองปาน ในการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลและภาพถ่าย เพื่อวัตถุประสงค์ในการจัดทำโครงสร้างอัตรากำลัง เผยแพร่กิจกรรม และจัดทำเล่มรายงาน CQI เสนอต่อ อบจ.ลำปาง</p>
+   <div class="sign">
+    <div>ลงชื่อ <span class="dot">&nbsp;</span> ผู้ให้ความยินยอม<br>( <span class="dot">&nbsp;</span> )</div>
+    <div>ลงชื่อ <span class="dot">&nbsp;</span> พยาน<br>( <span class="dot">&nbsp;</span> )</div>
+    <div>ลงชื่อ <span class="dot">&nbsp;</span> ผู้รับความยินยอม<br>( <span class="dot">&nbsp;</span> )<br>ผอ.รพ.สต.</div>
+   </div>
+  </div>
+ </section>`;
+
+ const p12=`<section class="page" id="p12">
+  <div class="card">
+   <h2>หมวดที่ 12 : แอปพลิเคชันและเว็บไซต์ที่เกี่ยวข้องกับการปฏิบัติงาน</h2>
+   <p class="note">รวบรวมระบบสารสนเทศ เว็บไซต์ และแอปพลิเคชันที่ใช้ในการปฏิบัติงานของ รพ.สต. สามารถกดลิงก์เพื่อเข้าใช้งานได้ทันที (เปิดโหมดแก้ไขเพื่อเพิ่ม/ลบรายการ หรือเปลี่ยนภาพไอคอนและเบอร์โทรติดต่อได้)</p>
+   
+   <table><thead><tr>
+    <th style="width:92px">ภาพไอคอน</th>
+    <th style="width:25%">ชื่อแอปพลิเคชัน / เว็บไซต์</th>
+    <th style="width:25%">ลิงก์เข้าใช้งาน</th>
+    <th style="width:20%">เจ้าของระบบ / หน่วยงาน</th>
+    <th style="width:15%">เบอร์โทรติดต่อ</th>
+    <th class="act" style="width:58px">จัดการ</th>
+   </tr></thead><tbody>
+    <tr>
+     <td class="pcell">${avatar()}</td>
+     <td><b>HDC (Health Data Center)</b><br><span class="note">ฐานข้อมูลสุขภาพกระทรวงสาธารณสุข</span></td>
+     <td><a class="flink" href="https://hdc.moph.go.th" target="_blank" rel="noopener" contenteditable="false">https://hdc.moph.go.th</a></td>
+     <td>กระทรวงสาธารณสุข</td>
+     <td>02-590-1000</td>
+     <td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td>
+    </tr>
+    <tr>
+     <td class="pcell">${avatar()}</td>
+     <td><b>JHCIS / หมอพร้อม / ระบบบริการ</b><br><span class="note">ฐานข้อมูลบริการปฐมภูมิ</span></td>
+     <td><a class="flink" href="https://moph.go.th" target="_blank" rel="noopener" contenteditable="false">เว็บไซต์กระทรวงฯ</a></td>
+     <td>กองบริหารการสาธารณสุข</td>
+     <td>(ระบุเบอร์โทร)</td>
+     <td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td>
+    </tr>
+   </tbody></table>
+   <div class="edit-only" style="margin-top:.6rem"><button class="mini add" contenteditable="false" onclick="addAppRow(this)">+ เพิ่มแอปพลิเคชัน/เว็บไซต์</button></div>
+  </div>
+ </section>`;
+
+ return home+p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+SITES.map(sitePage).join('');
+}
+
+/* ================= เมนู / เปลี่ยนหน้า ================= */
+const KEY='mp_plan_v12';
+const app=document.getElementById('app');
+app.innerHTML=localStorage.getItem(KEY)||buildApp();
+MAIN.forEach(([id,t])=>nav1.insertAdjacentHTML('beforeend',`<a onclick="go('${id}')" data-t="${id}">${t}</a>`));
+SITES.forEach(s=>nav2.insertAdjacentHTML('beforeend',`<a onclick="go('${s.id}')" data-t="${s.id}">${s.name}</a>`));
+function go(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===id));
+ document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.dataset.t===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+go('home');
+
+/* ================= จัดเก็บข้อมูล ================= */
+function persist(msg){
+ try{ localStorage.setItem(KEY,app.innerHTML); usage(); if(msg) alert('บันทึกข้อมูลเรียบร้อยแล้ว'); return true; }
+ catch(e){ alert('พื้นที่จัดเก็บเต็ม กรุณาลดจำนวนภาพ หรือกดปุ่ม “สำรองไฟล์” เก็บไว้'); return false; }
+}
+function usage(){
+ const mb=((localStorage.getItem(KEY)||'').length/1048576).toFixed(2);
+ document.getElementById('usage').textContent='พื้นที่จัดเก็บที่ใช้ : '+mb+' MB';
+}
+usage();
+app.addEventListener('input',()=>persist());
+
+/* ================= โหมดแก้ไข ================= */
+function toggleEdit(){
+ const on=document.body.classList.toggle('edit');
+ app.contentEditable=on;
+ document.querySelectorAll('.gitem figcaption').forEach(f=>f.contentEditable=on);
+ const b=document.getElementById('editBtn');
+ b.textContent=on?'บันทึกการแก้ไข':'เปิดโหมดแก้ไข';
+ b.className=on?'b-save':'b-edit';
+ if(!on) persist(true);
+}
+function addRow(btn){
+ const tb=btn.closest('div').previousElementSibling.querySelector('tbody');
+ tb.insertAdjacentHTML('beforeend',`<tr><td class="pcell">${avatar()}</td><td>(ระบุชื่อ–นามสกุล)</td><td>(ตำแหน่งตามกรอบ)</td><td>(งานที่รับผิดชอบ)</td><td>(กรอบงาน)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>`);
+ persist();
+}
+function addNews(btn){
+ const tb=btn.closest('div').previousElementSibling.querySelector('tbody');
+ tb.insertAdjacentHTML('beforeend',newsRow('(วัน/เดือน/ปี)','(ระบุชื่อเรื่อง)','(ประเภท)'));
+ persist();
+}
+function addNetwork(btn){
+ const tb=btn.closest('div').previousElementSibling.querySelector('tbody');
+ tb.insertAdjacentHTML('beforeend',`<tr><td>(ระบุชื่อเครือข่าย/องค์กร)</td><td>(ระบุชื่อผู้ประสานงาน)</td><td>(ระบุตำแหน่ง)</td><td>(ระบุเบอร์โทร)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>`);
+ persist();
+}
+function addAppRow(btn){
+ const tb=btn.closest('div').previousElementSibling.querySelector('tbody');
+ tb.insertAdjacentHTML('beforeend',`<tr><td class="pcell">${avatar()}</td><td><b>(ชื่อแอป/เว็บไซต์)</b><br><span class="note">(คำอธิบายสั้นๆ)</span></td><td><a class="flink" href="#" target="_blank" rel="noopener" contenteditable="false">(วางลิงก์ที่นี่)</a></td><td>(หน่วยงานเจ้าของ)</td><td>(เบอร์โทรติดต่อ)</td><td class="act"><button class="mini del" contenteditable="false" onclick="delRow(this)">ลบ</button></td></tr>`);
+ persist();
+}
+function delRow(btn){ if(confirm('ยืนยันลบแถวนี้?')){ btn.closest('tr').remove(); persist(); } }
+function resetAll(){ if(confirm('ล้างข้อมูลทั้งหมด กลับสู่ค่าเริ่มต้น?')){ localStorage.removeItem(KEY); location.reload(); } }
+
+/* ================= ภาพถ่าย / ไฟล์แนบ ================= */
+const picker=document.getElementById('picker');
+let target=null,mode='';
+function pickPhoto(el){ if(!document.body.classList.contains('edit'))return; target=el;mode='staff';picker.multiple=false;picker.accept='image/*';picker.value='';picker.click(); }
+function addPhotos(btn){ target=btn.closest('.album').querySelector('.gal');mode='gal';picker.multiple=true;picker.accept='image/*';picker.value='';picker.click(); }
+function attachFile(btn){ target=btn.closest('td').querySelector('.fbox');mode='file';picker.multiple=false;picker.accept='.pdf,.doc,.docx,.xls,.xlsx,image/*';picker.value='';picker.click(); }
+function attachLink(btn){
+ const box=btn.closest('td').querySelector('.fbox');
+ const url=prompt('วางลิงก์เอกสาร (เช่น Google Drive)');
+ if(!url) return;
+ const name=prompt('ชื่อที่ต้องการแสดง','เอกสารแนบ')||'เอกสารแนบ';
+ box.insertAdjacentHTML('beforeend',`<a class="flink" href="${url}" target="_blank" rel="noopener" contenteditable="false">${name}</a><button class="mini del edit-only" contenteditable="false" onclick="rmFile(this)">×</button>`);
+ persist();
+}
+function rmFile(btn){ const p=btn.previousElementSibling; if(p)p.remove(); btn.remove(); persist(); }
+function rmPhoto(btn){
+ const a=btn.closest('.avatar'); a.classList.remove('has');
+ a.innerHTML='<span class="ic">คลิกเพื่อ<br>เพิ่มรูป</span><button class="rm" onclick="event.stopPropagation();rmPhoto(this)">&times;</button>';
+ persist();
+}
+function delPhoto(btn){ if(confirm('ลบภาพนี้?')){ const g=btn.closest('.gal');btn.closest('.gitem').remove();if(!g.querySelector('.gitem'))g.innerHTML='<div class="empty">ยังไม่มีภาพในอัลบั้มนี้</div>';persist(); } }
+function shrink(file,max,q){
+ return new Promise(res=>{
+  const fr=new FileReader();
+  fr.onload=e=>{const im=new Image();im.onload=()=>{
+    let w=im.width,h=im.height;
+    if(w>h){ if(w>max){h=Math.round(h*max/w);w=max;} } else { if(h>max){w=Math.round(h*max/h);h=max;} }
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    c.getContext('2d').drawImage(im,0,0,w,h);
+    res(c.toDataURL('image/jpeg',q));
+  };im.src=e.target.result;};
+  fr.readAsDataURL(file);
+ });
+}
+function readAsData(file){ return new Promise(r=>{const fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(file);}); }
+picker.addEventListener('change',async e=>{
+ const files=[...e.target.files]; if(!files.length) return;
+ if(mode==='staff'){
+  const d=await shrink(files[0],400,0.82);
+  target.classList.add('has');
+  target.innerHTML=`<img src="${d}" alt="ภาพ" draggable="false"><button class="rm" onclick="event.stopPropagation();rmPhoto(this)">&times;</button>`;
+ }else if(mode==='gal'){
+  const em=target.querySelector('.empty'); if(em) em.remove();
+  for(const f of files){
+   const d=await shrink(f,1000,0.72);
+   target.insertAdjacentHTML('beforeend',`<figure class="gitem" contenteditable="false"><img src="${d}" alt="ภาพกิจกรรม" onclick="lightbox(this)"><figcaption contenteditable="true">คำบรรยายภาพ / วันที่จัดกิจกรรม</figcaption><button class="rm" onclick="delPhoto(this)">&times;</button></figure>`);
+  }
+ }else if(mode==='file'){
+  const f=files[0];
+  if(f.size>1572864){ alert('ไฟล์มีขนาดใหญ่เกินไป แนะนำให้อัปโหลดขึ้น Google Drive แล้วใช้ปุ่มแนบลิงก์แทน'); return; }
+  const d=await readAsData(f);
+  target.insertAdjacentHTML('beforeend',`<a class="flink" href="${d}" download="${f.name}" contenteditable="false">${f.name}</a><button class="mini del edit-only" contenteditable="false" onclick="rmFile(this)">×</button>`);
+ }
+ persist();
+});
+function lightbox(img){ if(document.body.classList.contains('edit'))return; document.getElementById('lbimg').src=img.src; document.getElementById('lb').classList.add('on'); }
+
+/* ================= พิมพ์ / สำรองไฟล์ ================= */
+function printPage(){ document.body.classList.remove('printall','printone'); window.print(); }
+function printAll(){ document.body.classList.add('printall'); window.print(); setTimeout(()=>document.body.classList.remove('printall'),900); }
+function printForm(){ document.body.classList.add('printone'); window.print(); setTimeout(()=>document.body.classList.remove('printone'),900); }
+function backup(){
+ const blob=new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);
+ a.download='แผนพัฒนา-รพสต-เมืองปาน-'+new Date().toISOString().slice(0,10)+'.html';
+ a.click();
+}
+
+/* ================= ปฏิทินประชุมอัตโนมัติ ================= */
+(function(){
+ const M=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+ const n=new Date(),y=n.getFullYear(),m=n.getMonth();
+ let d=new Date(y,m,1),L=[];
+ while(d.getDay()!==4) d.setDate(d.getDate()+1);
+ for(let i=0;i<3;i++){L.push(d.getDate());d.setDate(d.getDate()+7);}
+ const el=document.getElementById('meetDates');
+ if(el) el.textContent=L.map((v,i)=>'พฤหัสบดีที่ '+v).join(', ')+'  '+M[m]+' '+(y+543);
+})();
+</script>
+</body>
+</html>
